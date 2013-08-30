@@ -29,6 +29,9 @@ int main(int argc, char *argv[])
     QByteArray json = school->exportToJson();
     qDebug() << json;
 
+
+
+    // Importing json into your custom instance
     QByteArray jsonInput = "\"{\"address\": {"
                 "\"city\": \"Rajshahi\","
                 "\"country\": \"Bangladesh\","
@@ -53,8 +56,10 @@ int main(int argc, char *argv[])
                         "\"C/C++\","
                         "\"Algorithms\"]}]}\"";
 
-    School* newSchool = new School(&a);
-    newSchool->importFromJson(jsonInput);
+    School* school = new School(&a);
+    school->importFromJson(jsonInput);
+    qDebug() <<"School name: " << school->name();
+    qDebug() <<"School address's city: " << school->address()->city();
 
     return a.exec();
 }

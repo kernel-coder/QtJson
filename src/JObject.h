@@ -28,6 +28,17 @@
     public: t* x() {return _##x;} \
     void x(t* v){_##x = v;}
 
+
+// t: type, x: property name
+#define PropertyPrivateSet_Ptr_O(t, x) private: QObject* _##x;  \
+    public: t* x() {return qobject_cast<t*>(_##x);} \
+    private: void x(QObject* v){_##x = v;}
+
+// t: type, x: property name
+#define PropertyPublicSet_Ptr_O(t, x)  private: QObject* _##x;  \
+    public: t* x() {return qobject_cast<t*>(_##x);} \
+    public: void x(QObject* v){_##x = v;}
+
 // t: type, x: property name
 #define MetaPropertyPrivateSet(t, x) private: Q_PROPERTY(t x READ x WRITE x) \
     PropertyPrivateSet(t, x)
@@ -38,13 +49,19 @@
 
 // t: type, x: property name
 #define MetaPropertyPrivateSet_Ptr(t, x) private: Q_PROPERTY(QObject* x READ x WRITE x) \
-    PropertyPrivateSet_Ptr(t, x) \
+    PropertyPrivateSet_Ptr_O(t, x) \
     public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);}
 
 // t: type, x: property name
 #define MetaPropertyPublicSet_Ptr(t, x) private: Q_PROPERTY(QObject* x READ x WRITE x) \
-    PropertyPublicSet_Ptr(QObject, x) \
+    PropertyPublicSet_Ptr_O(t, x) \
     public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);}
+
+// t: type, x: property name
+#define MetaPropertyPrivateSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
+    PropertyPrivateSet(QVariantList, x) \
+    public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);} \
+    void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}}
 
 // t: type, x: property name
 #define MetaPropertyPublicSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
