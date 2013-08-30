@@ -26,11 +26,11 @@ Usage
 ======
 Classes that we'll use for the sample code following ---
 
+// All the classes that we need for our sample!
 class Address : public JObject {
     Q_OBJECT
 public:
     Q_INVOKABLE explicit Address(QObject* parent = 0) : JObject(parent){}
-
     MetaPropertyPublicSet(QString, country)
     MetaPropertyPublicSet(QString, city)
     MetaPropertyPublicSet(QString, zip)
@@ -58,7 +58,6 @@ class School : public JObject {
     Q_OBJECT
 public:
     Q_INVOKABLE explicit School(QObject* parent = 0) : JObject(parent){}
-
     MetaPropertyPublicSet(QString, name)
     MetaPropertyPublicSet_Ptr(Address, address)
     MetaPropertyPublicSet_Ptr_List(Teacher, teachers)
