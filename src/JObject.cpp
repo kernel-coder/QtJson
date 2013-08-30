@@ -95,6 +95,7 @@ bool JObject::importFromVariant(const QVariant &v)
 						if (child) {
 							child->setParent(this);
                             child->importFromVariant(value);
+							setProperty(mp.name(), QVariant::fromValue(child));
 						}
 						else {
 							return false;

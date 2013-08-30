@@ -61,13 +61,17 @@
 #define MetaPropertyPrivateSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
     PropertyPrivateSet(QVariantList, x) \
     public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);} \
-    void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}}
+    void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
+    void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}}
 
 // t: type, x: property name
 #define MetaPropertyPublicSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
     PropertyPublicSet(QVariantList, x) \
     public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);} \
-    void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}}
+    void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
+    void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
+    int count##t()const {return _##x.length();} \
+    t* item##t##At(int i) {return _##x.at(i).value<t*>();}
 
 
 /**
