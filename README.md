@@ -13,8 +13,11 @@ Only to Qt5
 How to Use?
 ======
 1) Include the QtJson.pri file into your pro file
+
 2) Create your class inhering the JObject class
+
 3) Your class's default constructor shuold be marked with Q_INVOKABLE
+
 4) Add properties to your class using the 3 macros --  MetaPropertyPublicSet, MetaPropertyPublicSet_Ptr, MetaPropertyPublicSet_Ptr_List -- this way you will see getter/setter with the same name as your property name you said in the MetaPropertyPublicSet* macro.
   i) Use MetaPropertyPublicSet to declare properites of built-in types (QString, int and such, that is, all the types in QMetaType::Type enum)
   ii) Use MetaPropertyPublicSet_Ptr to declare property of your other JObject base custom types.
