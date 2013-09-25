@@ -14,7 +14,7 @@ How to Use?
 ======
 1) Include the QtJson.pri file into your pro file
 
-2) Create your class inhering the JObject class
+2) Create your class inheriting the JObject class
 
 3) Your class's default constructor shuold be marked with Q_INVOKABLE
 
