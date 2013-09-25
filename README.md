@@ -20,11 +20,11 @@ How to Use?
 
 4) Add properties to your class using the 3 macros --  MetaPropertyPublicSet, MetaPropertyPublicSet_Ptr, MetaPropertyPublicSet_Ptr_List -- this way you will see getter/setter with the same name as your property name you said in the MetaPropertyPublicSet* macro.
   
-  i) Use MetaPropertyPublicSet to declare properites of built-in types (QString, int and such, that is, all the types in QMetaType::Type enum)
+   i) Use MetaPropertyPublicSet to declare properites of built-in types (QString, int and such, that is, all the types in QMetaType::Type enum)
   
-  ii) Use MetaPropertyPublicSet_Ptr to declare property of your other JObject base custom types.
+   ii) Use MetaPropertyPublicSet_Ptr to declare property of your other JObject base custom types.
   
-  iii) Use MetaPropertyPublicSet_Ptr_List to declare property of list type of your other JObject base custom types. You will see a append<PropertyName> method in the class to append an item in the list of that particular type.
+   iii) Use MetaPropertyPublicSet_Ptr_List to declare property of list type of your other JObject base custom types. You will see a append<PropertyName> method in the class to append an item in the list of that particular type.
 
 
 See the test project in test directory for a bit more details.
