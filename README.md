@@ -2,7 +2,7 @@
 ======
 
 Importing json into your custom class's instance and vice versa!
-Json support added in Qt5. However, this utility codebase will let you import json data into you your class's instance and you can also get json from your class instance! Please take a look at the sample!
+Json support added in Qt5. However, this utility codebase will let you import json data into your class's instance and you can also get json from your class instance! Please take a look at the sample!
 
 
 Dependencies
