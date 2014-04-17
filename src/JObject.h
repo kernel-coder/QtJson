@@ -19,6 +19,25 @@
     void x(const t& v){_##x = v;}
 
 // t: type, x: property name
+#define MetaPropertyPrivateSet_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
+    PropertyPrivateSet(QVariantList, x) \
+    public: \
+    void append##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
+    void remove##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
+    int count##x()const {return _##x.length();} \
+    t item##x##At(int i) {return _##x.at(i).value<t>();} \
+    bool item##t##Exist(const t& i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
+
+// t: type, x: property name
+#define MetaPropertyPublicSet_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
+    PropertyPublicSet(QVariantList, x) \
+    public: \
+    void append##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
+    void remove##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
+    int count##x()const {return _##x.length();} \
+    t item##x##At(int i) {return _##x.at(i).value<t>();}
+
+// t: type, x: property name
 #define PropertyPrivateSet_Ptr(t, x) private: t* _##x;  \
     public: t* x() {return _##x;} \
     private: void x(t* v){_##x = v;}
@@ -64,7 +83,8 @@
     void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
     void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
     int count##t()const {return _##x.length();} \
-    t* item##t##At(int i) {return _##x.at(i).value<t*>();}
+    t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
+    bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
 
 // t: type, x: property name
 #define MetaPropertyPublicSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
@@ -73,7 +93,8 @@
     void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
     void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
     int count##t()const {return _##x.length();} \
-    t* item##t##At(int i) {return _##x.at(i).value<t*>();}
+    t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
+    bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
 
 
 /**
