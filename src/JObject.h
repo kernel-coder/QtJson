@@ -21,9 +21,9 @@
 // t: type, x: property name
 #define MetaPropertyPrivateSet_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
     PropertyPrivateSet(QVariantList, x) \
-    public: \
     void append##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
     void remove##x(const t& i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
+    public: \
     int count##x()const {return _##x.length();} \
     t item##x##At(int i) {return _##x.at(i).value<t>();} \
     bool item##t##Exist(const t& i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
@@ -79,10 +79,10 @@
 // t: type, x: property name
 #define MetaPropertyPrivateSet_Ptr_List(t, x)  private: Q_PROPERTY(QVariantList x READ x WRITE x) \
     PropertyPrivateSet(QVariantList, x) \
-    public: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);} \
+    private: Q_INVOKABLE void _type##x(const QString& prop){registerPtrProperty(prop, &t::staticMetaObject);} \
     void append##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.append(v);}} \
     void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
-    int count##t()const {return _##x.length();} \
+    public: int count##t()const {return _##x.length();} \
     t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
     bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
 
@@ -105,9 +105,11 @@ class JObject : public QObject
     Q_OBJECT
 public:
     Q_INVOKABLE explicit JObject(QObject *parent = 0);
+    virtual void initAfterConstruct() {}
+    virtual void initAfterImport() {}
 
-    QVariant exportToVariant();
-    bool importFromVariant(const QVariant& v);
+    virtual QVariant exportToVariant();
+    virtual bool importFromVariant(const QVariant& v);
 
     QByteArray exportToJson(bool indented = true);
     bool importFromJson(const QByteArray& json);

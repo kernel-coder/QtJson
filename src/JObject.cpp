@@ -92,9 +92,9 @@ bool JObject::importFromVariant(const QVariant &v)
                     const QMetaObject* cmo = metaObjectForProp(name);
 					if (cmo) {
                         JObject* child = qobject_cast < JObject* > (cmo->newInstance());
-						if (child) {
-							child->setParent(this);
-                            child->importFromVariant(value);
+                        if (child) {
+                            child->setParent(this);child->initAfterConstruct();
+                            child->importFromVariant(value);child->initAfterImport();
 							setProperty(mp.name(), QVariant::fromValue(child));
 						}
 						else {
@@ -114,7 +114,8 @@ bool JObject::importFromVariant(const QVariant &v)
                     if (v.type() == QVariant::Map) {
                         JObject* child = cmo == 0? 0 : qobject_cast< JObject* >(cmo->newInstance());
                         if (child) {
-                            child->importFromVariant(v);
+                            child->setParent(this);child->initAfterConstruct();
+                            child->importFromVariant(v);child->initAfterImport();
                             newList.append(QVariant::fromValue(child));
                         }
                         else {
