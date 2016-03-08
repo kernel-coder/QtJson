@@ -140,7 +140,6 @@
     void insert##t(int ind, t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.insert(ind,v);}} \
     void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
     t* remove##t##At(int ind){t* i = _##x.at(ind).value<t*>(); QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);} return i;} \
-    Q_INVOKABLE void removeAll##t() {for (int i = _##x.length() - 1; i >= 0; i--) (_##x.at(i).value<t*>())->deleteLater(); _##x.clear();} \
     public: Q_INVOKABLE int count##t()const {return _##x.length();} \
     Q_INVOKABLE t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
     Q_INVOKABLE bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
@@ -155,7 +154,6 @@
     void insert##t(int ind, t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.insert(ind,v);}} \
     void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
     t* remove##t##At(int ind){t* i = _##x.at(ind).value<t*>(); QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);} return i;} \
-    Q_INVOKABLE void removeAll##t() {for (int i = _##x.length() - 1; i >= 0; i--) (_##x.at(i).value<t*>())->deleteLater(); _##x.clear();} \
     public: Q_INVOKABLE int count##t()const {return _##x.length();} \
     Q_INVOKABLE t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
     Q_INVOKABLE bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
@@ -171,7 +169,6 @@
     Q_INVOKABLE void remove##t(t* i){QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);}} \
     Q_INVOKABLE t* remove##t##At(int ind){t* i = _##x.at(ind).value<t*>(); QVariant v = QVariant::fromValue(i); if (v.isValid()) { _##x.removeAll(v);} return i;} \
     Q_INVOKABLE int count##t()const {return _##x.length();} \
-    Q_INVOKABLE void removeAll##t() {for (int i = _##x.length() - 1; i >= 0; i--) (_##x.at(i).value<t*>())->deleteLater(); _##x.clear();} \
     Q_INVOKABLE t* item##t##At(int i) {return _##x.at(i).value<t*>();} \
     Q_INVOKABLE bool item##t##Exist(t* i) const {QVariant v = QVariant::fromValue(i); if (v.isValid()) { return _##x.contains(v);} else return false;}
 
