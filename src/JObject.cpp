@@ -78,13 +78,13 @@ bool JObject::importFromVariant(const QVariant &v)
     const QMetaObject* mo = metaObject();
     int count = mo->propertyCount();
 
-    if ( (count - 1) > map.count()) return false;
+    //if ( (count - 1) > map.count()) return false;
 
     for (int i = 0; i < count; i++) {
         QMetaProperty mp = mo->property(i);
         QString  name(mp.name());
         if (name == "objectName") continue;
-        if (!map.contains(name)) return false;
+        if (!map.contains(name)) continue;
         QVariant value = map[name];
         QVariant::Type type = mp.type();
         switch (type) {
